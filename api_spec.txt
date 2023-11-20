@@ -1,0 +1,184 @@
+Get all users
+
+GET /api/users
+Response:
+<HTTP STATUS CODE 200>
+{
+"users": [
+{
+"id": 1,
+"username": "mr897",
+"email": "mr897@cornell.edu",
+"entries": [ <SERIALIZED ENTRIES>, ... ],
+"message_sent": [ <SERIALIZED MESSAGES SENT>, ... ],
+"message_received": [ <SERIALIZED MESSAGES RECEIVED>, ... ]
+},
+...
+]
+}
+
+Create a user 
+
+POST /api/users
+Request:
+{
+"id": <ID>,
+"username": “username”
+“Email”: “email@gmail.com”
+}
+Response:
+<HTTP STATUS CODE 201>
+{
+"id": <ID>,
+"username": “username”
+“Email”: “email@gmail.com”
+"entries": [],
+"message_sent": [],
+"message_received": []
+}
+
+Get user 
+
+GET /api/users/{id}
+RESPONSE:
+<HTTP STATUS CODE 200>
+{
+"Id": {id},
+"username": "mr897",
+"email": "mr897@cornell.edu",
+"entries": [ <SERIALIZED ENTRIES>, ... ],
+"message_sent": [ <SERIALIZED MESSAGES SENT>, ... ],
+"message_received": [ <SERIALIZED MESSAGES RECEIVED>, ... ]
+}
+
+Delete user 
+
+DELETE /api/users/{id}
+RESPONSE:
+<HTTP STATUS CODE 200>
+{
+"Id": {id},
+"username": "mr897",
+"email": "mr897@cornell.edu",
+"entries": [ <SERIALIZED ENTRIES>, ... ],
+"message_sent": [ <SERIALIZED MESSAGES SENT>, ... ],
+"message_received": [ <SERIALIZED MESSAGES RECEIVED>, ... ]
+}
+
+Create entry
+
+POST /api/users/{id}/entry
+Request:
+{
+"text": “text”
+}
+Response:
+<HTTP STATUS CODE 201>
+{
+"id": <ID>,
+"text": “text”
+“timesnap”: date 
+"user_id": {id},
+}
+
+Get entry 
+
+GET /api/users/{id}/entry/{id}
+Response:
+{
+"id": {id},
+"text": “text”
+“timesnap”: date 
+"user_id": {id},
+}
+
+Delete entry 
+
+DELETE /api/users/{id}/entry/{id}
+Response:
+{
+"id": {id},
+"text": “text”
+“timesnap”: date 
+"user_id": {id},
+}
+
+Get all entries 
+
+GET /api/users/{id}/entry 
+Response:
+<HTTP STATUS CODE 200>
+{
+"entries": [
+{
+"id": 1,
+"text": “text”
+“timesnap”: date 
+"user_id": {id},
+},
+...
+]
+}
+
+Create gratitude message 
+
+POST /api/users/{id_sender}/users/{id_receiver}/message
+Request:
+{
+"text": “text”
+}
+Response:
+<HTTP STATUS CODE 201>
+{
+“Id”: <ID>,
+"text": “text”,
+"timestamp": “timestamp”
+“sender_id”: {id_sender} 
+"recipient_id": {id_receiver}
+}
+
+Get all gratitude messages
+
+GET /api/users/{id_sender}/users/{id_receiver}/message
+Response:
+<HTTP STATUS CODE 200>
+{
+"messages": [
+{
+“Id”: 1,
+"text": “text”,
+"timestamp": “timestamp”
+“sender_id”: {id_sender} 
+"recipient_id": {id_receiver}
+},
+...
+]
+}
+
+Get gratitude message 
+
+GET /api/users/{id_sender}/users/{id_receiver}/message/{id}
+Response:
+{
+“Id”: {id},
+"text": “text”,
+"timestamp": “timestamp”
+“sender_id”: {id_sender} 
+"recipient_id": {id_receiver}
+}
+
+Delete gratitude message 
+
+DELETE /api/users/{id_sender}/users/{id_receiver}/message/{id}
+Response:
+{
+“Id”: {id},
+"text": “text”,
+"timestamp": “timestamp”
+“sender_id”: {id_sender} 
+"recipient_id": {id_receiver}
+}
+
+Database Relationships:
+Users → Entry (One to Many) 
+Users → Gratitude Message (Many to many)
