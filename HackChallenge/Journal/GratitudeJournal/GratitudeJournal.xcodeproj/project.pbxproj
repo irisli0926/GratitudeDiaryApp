@@ -11,6 +11,7 @@
 		51BA7FBF2B0C9735008936E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BA7FBE2B0C9735008936E5 /* ContentView.swift */; };
 		51BA7FC12B0C9738008936E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51BA7FC02B0C9738008936E5 /* Assets.xcassets */; };
 		51BA7FC42B0C9738008936E5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51BA7FC32B0C9738008936E5 /* Preview Assets.xcassets */; };
+		51BA7FCB2B0CACA9008936E5 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BA7FCA2B0CACA9008936E5 /* CustomNavigationBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		51BA7FBE2B0C9735008936E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		51BA7FC02B0C9738008936E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		51BA7FC32B0C9738008936E5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		51BA7FCA2B0CACA9008936E5 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				51BA7FBC2B0C9735008936E5 /* GratitudeJournalApp.swift */,
 				51BA7FBE2B0C9735008936E5 /* ContentView.swift */,
+				51BA7FCA2B0CACA9008936E5 /* CustomNavigationBar.swift */,
 				51BA7FC02B0C9738008936E5 /* Assets.xcassets */,
 				51BA7FC22B0C9738008936E5 /* Preview Content */,
 			);
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51BA7FCB2B0CACA9008936E5 /* CustomNavigationBar.swift in Sources */,
 				51BA7FBF2B0C9735008936E5 /* ContentView.swift in Sources */,
 				51BA7FBD2B0C9735008936E5 /* GratitudeJournalApp.swift in Sources */,
 			);

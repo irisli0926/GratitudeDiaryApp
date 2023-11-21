@@ -7,17 +7,22 @@
 
 import SwiftUI
 
+
+
 struct ContentView: View {
 
-    @State private var entries: [String] = [""] // Array to hold textfield values
-    @State private var textFieldCount = 1 // Counter for text fields
+    @State private var entries: [String] = ["", "", ""]
+    @State private var textFieldCount = 3
+
+    @State private var tabSelected: Tab = .paperplane
+    init() {
+        UITabBar.appearance().isHidden = true
+    }
 
     var body: some View {
         
-        
         ZStack {
             Color(.white).ignoresSafeArea()
-            
             VStack{
                 
                 HStack(alignment: .top) {
@@ -32,11 +37,7 @@ struct ContentView: View {
                             .font(.title)
                             .fontWeight(.medium)
                             .multilineTextAlignment(.leading).padding(.horizontal)
-                        
-                        //                    Image(systemName: "star.fill")
-                        
                     }
-                    
                     Spacer()
                     Image("kid1").resizable().clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                         .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fit/*@END_MENU_TOKEN@*/).padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/).frame(width: 160)
@@ -45,36 +46,82 @@ struct ContentView: View {
                 
                 Divider().overlay(.black)
             
-                
                 ForEach(0..<textFieldCount, id: \.self) { index in
-                    HStack {
+                    HStack(alignment: .center) {
                         Text("\(index + 1)")
                             .font(.largeTitle)
                             .multilineTextAlignment(.leading)
                             .padding(.horizontal)
                         
-                        TextField("Input Entry \(index + 1)", text: $entries[index])
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        TextField("Input Gratitude Entry \(index + 1)", text: $entries[index])
+
+                        Button(action: {
+                            entries.remove(at: index)
+                            textFieldCount -= 1
+                        }) {
+                            Image(systemName: "minus.circle.fill")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(.red)
+                        }.padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 20))
+                    }
+                    Divider()
+                }
+                
+                HStack{
+                    Spacer()
+                    
+                    Button(action: {
+                        textFieldCount += 1
+                        entries.append("")
+                    }) {
+                        Image(systemName: "plus.circle.fill")
+                            .resizable()
+                            .frame(width: 32, height: 32)
+                            .foregroundColor(.black)
+                    }
+                    .padding()
+                    
+                    Image(systemName:"camera.fill")
+                        .resizable()
+                        .frame(width: 40, height: 32)
+                        .foregroundColor(.black).padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 20))
+                    
+                
+                }
+
+                
+                NavigationView {
+                    VStack {
+                        Spacer()
+                        CustomTabBar(selectedTab: $tabSelected)
+                            .frame(height: 60)
+                    }
+                    .navigationBarTitleDisplayMode(.inline)
+                    
+                    TabView(selection: $tabSelected) {
+                        ForEach(Tab.allCases, id: \.rawValue) { tab in
+                            Text("\(tab.rawValue.capitalized)")
+                                .tag(tab)
+                        }
                     }
                 }
-                Button(action: {
-                    textFieldCount += 1 // Increase count when the button is tapped
-                    entries.append("") // Add an empty string to the array for the new text field
-                }) {
-                    Text("Add Text Field")
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                }
+                .navigationViewStyle(StackNavigationViewStyle())
+                    
+                    
+                
                 
                 
             }
+            
         }
 
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .previewInterfaceOrientation(.portrait)
+    }
 }
