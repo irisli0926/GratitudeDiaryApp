@@ -12,6 +12,10 @@
 		51BA7FC12B0C9738008936E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51BA7FC02B0C9738008936E5 /* Assets.xcassets */; };
 		51BA7FC42B0C9738008936E5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51BA7FC32B0C9738008936E5 /* Preview Assets.xcassets */; };
 		51BA7FCB2B0CACA9008936E5 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BA7FCA2B0CACA9008936E5 /* CustomNavigationBar.swift */; };
+		51BA7FCE2B17F5F8008936E5 /* KronaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 51BA7FCD2B17F5F8008936E5 /* KronaOne-Regular.ttf */; };
+		51BA7FD32B17FF2E008936E5 /* Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BA7FD22B17FF2E008936E5 /* Archive.swift */; };
+		51BA7FD52B180004008936E5 /* Journal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BA7FD42B180004008936E5 /* Journal.swift */; };
+		51BA7FD72B1801B8008936E5 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BA7FD62B1801B8008936E5 /* Friends.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +25,12 @@
 		51BA7FC02B0C9738008936E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		51BA7FC32B0C9738008936E5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		51BA7FCA2B0CACA9008936E5 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
+		51BA7FCD2B17F5F8008936E5 /* KronaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KronaOne-Regular.ttf"; sourceTree = "<group>"; };
+		51BA7FCF2B17F6D1008936E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		51BA7FD02B17FDFD008936E5 /* KumbhSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KumbhSans-Regular.ttf"; sourceTree = "<group>"; };
+		51BA7FD22B17FF2E008936E5 /* Archive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Archive.swift; sourceTree = "<group>"; };
+		51BA7FD42B180004008936E5 /* Journal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journal.swift; sourceTree = "<group>"; };
+		51BA7FD62B1801B8008936E5 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +63,10 @@
 		51BA7FBB2B0C9735008936E5 /* GratitudeJournal */ = {
 			isa = PBXGroup;
 			children = (
+				51BA7FCF2B17F6D1008936E5 /* Info.plist */,
+				51BA7FCC2B17F5B7008936E5 /* Font */,
 				51BA7FBC2B0C9735008936E5 /* GratitudeJournalApp.swift */,
+				51BA7FD12B17FF0F008936E5 /* Views */,
 				51BA7FBE2B0C9735008936E5 /* ContentView.swift */,
 				51BA7FCA2B0CACA9008936E5 /* CustomNavigationBar.swift */,
 				51BA7FC02B0C9738008936E5 /* Assets.xcassets */,
@@ -68,6 +81,25 @@
 				51BA7FC32B0C9738008936E5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		51BA7FCC2B17F5B7008936E5 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				51BA7FD02B17FDFD008936E5 /* KumbhSans-Regular.ttf */,
+				51BA7FCD2B17F5F8008936E5 /* KronaOne-Regular.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		51BA7FD12B17FF0F008936E5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				51BA7FD22B17FF2E008936E5 /* Archive.swift */,
+				51BA7FD42B180004008936E5 /* Journal.swift */,
+				51BA7FD62B1801B8008936E5 /* Friends.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51BA7FC42B0C9738008936E5 /* Preview Assets.xcassets in Resources */,
+				51BA7FCE2B17F5F8008936E5 /* KronaOne-Regular.ttf in Resources */,
 				51BA7FC12B0C9738008936E5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,7 +174,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				51BA7FCB2B0CACA9008936E5 /* CustomNavigationBar.swift in Sources */,
+				51BA7FD72B1801B8008936E5 /* Friends.swift in Sources */,
+				51BA7FD52B180004008936E5 /* Journal.swift in Sources */,
 				51BA7FBF2B0C9735008936E5 /* ContentView.swift in Sources */,
+				51BA7FD32B17FF2E008936E5 /* Archive.swift in Sources */,
 				51BA7FBD2B0C9735008936E5 /* GratitudeJournalApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,6 +315,7 @@
 				DEVELOPMENT_TEAM = WX24HTB63H;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GratitudeJournal/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -308,6 +345,7 @@
 				DEVELOPMENT_TEAM = WX24HTB63H;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GratitudeJournal/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

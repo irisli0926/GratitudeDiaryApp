@@ -15,24 +15,28 @@ enum Tab: String, CaseIterable {
 }
 
 struct CustomTabBar: View {
+    
     @Binding var selectedTab: Tab
+    
     private var fillImage: String {
         selectedTab.rawValue + ".fill"
     }
+    
     private var tabColor: Color {
         switch selectedTab {
         case .book:
-            return .blue
+            return .white
         case .paperplane:
-            return .indigo
+            return .white
         case .person:
-            return .purple
-
+            return .white
         }
     }
     
     
     var body: some View {
+        
+//        design of the navigation bar, check if filled
         VStack {
             HStack {
                 ForEach(Tab.allCases, id: \.rawValue) { tab in
@@ -49,8 +53,12 @@ struct CustomTabBar: View {
                     Spacer()
                 }
             }
-            .frame(width: nil, height: 60)
-            .background(.thinMaterial)
+            
+            .padding(.top, 12)
+            .padding(.vertical, 12)
+            .frame(height: 101, alignment: .top)
+            .background(Color.black)
+            .edgesIgnoringSafeArea(.horizontal)
          
             
         }
