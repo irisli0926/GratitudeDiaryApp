@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F2033B52B193D2300B95A5E /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2033B42B193D2300B95A5E /* JournalEntry.swift */; };
 		51BA7FBD2B0C9735008936E5 /* GratitudeJournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BA7FBC2B0C9735008936E5 /* GratitudeJournalApp.swift */; };
 		51BA7FBF2B0C9735008936E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BA7FBE2B0C9735008936E5 /* ContentView.swift */; };
 		51BA7FC12B0C9738008936E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51BA7FC02B0C9738008936E5 /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F2033B42B193D2300B95A5E /* JournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntry.swift; sourceTree = "<group>"; };
 		51BA7FB92B0C9735008936E5 /* GratitudeJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GratitudeJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51BA7FBC2B0C9735008936E5 /* GratitudeJournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GratitudeJournalApp.swift; sourceTree = "<group>"; };
 		51BA7FBE2B0C9735008936E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				51BA7FCA2B0CACA9008936E5 /* CustomNavigationBar.swift */,
 				51BA7FC02B0C9738008936E5 /* Assets.xcassets */,
 				51BA7FC22B0C9738008936E5 /* Preview Content */,
+				0F2033B42B193D2300B95A5E /* JournalEntry.swift */,
 			);
 			path = GratitudeJournal;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 			files = (
 				51BA7FCB2B0CACA9008936E5 /* CustomNavigationBar.swift in Sources */,
 				51BA7FD72B1801B8008936E5 /* Friends.swift in Sources */,
+				0F2033B52B193D2300B95A5E /* JournalEntry.swift in Sources */,
 				51BA7FD52B180004008936E5 /* Journal.swift in Sources */,
 				51BA7FBF2B0C9735008936E5 /* ContentView.swift in Sources */,
 				51BA7FD32B17FF2E008936E5 /* Archive.swift in Sources */,
