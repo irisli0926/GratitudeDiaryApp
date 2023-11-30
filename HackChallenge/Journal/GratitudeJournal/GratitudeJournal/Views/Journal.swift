@@ -64,38 +64,83 @@ struct Journal: View {
                 }
                 .padding(.bottom, 24)
                 
-                VStack(spacing: 16) {
-                    ForEach(0..<textFieldCount, id: \.self) { index in
-                        HStack(alignment: .top) {
-                            Text("\(index + 1)")
-                                .font(Font.custom("KronaOne-Regular", size: 36))
-                                .foregroundColor(.black)
+                ScrollView {
+                    ZStack{
+                        VStack(spacing: 16) {
+                            ForEach(0..<textFieldCount, id: \.self) { index in
+                                HStack(alignment: .top) {
+                                    Text("\(index + 1)")
+                                        .font(Font.custom("KronaOne-Regular", size: 36))
+                                        .foregroundColor(.black)
+                                    
+                                    Spacer().frame(width: 24)
+                                    
+                                    TextField("Input Value", text: $entries[index])
+                                        .font(Font.custom("KumbhSans-Regular", size: 14))
+                                    
+                                        .foregroundColor(Color(red: 0.55, green: 0.55, blue: 0.55))
+                        
+                                    
+                                        .frame(width: 220, alignment: .topLeading)
+                                    //  Add camera button?
+//                                    Image(systemName: "camera.fill")
+//                                        .resizable()
+//                                        .frame(width: 40, height: 32)
+//                                        .foregroundColor(.black)
+//                                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 20))
+                                    
+                                    
+                                    //add button to remove textfield?
+                                    Button(action: {
+                                        entries.remove(at: index)
+                                        textFieldCount -= 1
+                                    }) {
+                                        Image(systemName: "minus.circle.fill")
+                                            .resizable()
+                                            .frame(width: 24, height: 24)
+                                            .foregroundColor(.black)
+                                    }
+                                    
+                                }
+                                .padding(24)
+//                                .background(Color(red: 0.96, green: 0.93, blue: 0.79))
+                                .background(Color(red: 0.93, green: 0.93, blue: 0.93))
+                                .cornerRadius(20)
+                            }
                             
-                            Spacer().frame(width: 48)
                             
-                            TextField("Input Value", text: $entries[index])
-                                .font(Font.custom("KumbhSans-Regular", size: 14))
-                                .foregroundColor(Color(red: 0.55, green: 0.55, blue: 0.55))
-                                .frame(width: 220, alignment: .topLeading)
                             
-                            //add button to remove textfield?
+                            
+                            VStack {
+                                HStack {
+                                    Spacer()
+                                    Button(action: {
+                                        textFieldCount += 1
+                                        entries.append("")
+                                    }) {
+                                        Image(systemName: "plus.circle.fill")
+                                            .resizable()
+                                            .frame(width: 48, height: 48)
+                                            .foregroundColor(.black)
+                                        
+                                    }
+                                    
+                                
+                                }
+                                
+                            }
                             
                         }
                         .padding(24)
-                        .background(Color(red: 0.96, green: 0.93, blue: 0.79))
+                        .padding(.bottom, 100)
+                        .background(Color.white)
                         .cornerRadius(20)
+                        .frame(maxHeight: .infinity, alignment: .top)
+                        
 
+                        
                     }
-
-                    
                 }
-                .padding(24)
-                .padding(.bottom, 300)
-                .background(Color.white)
-                .cornerRadius(20)
-                .frame(maxHeight: .infinity, alignment: .top)
-//                Icons
-
             }
 
         }
