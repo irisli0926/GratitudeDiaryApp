@@ -54,12 +54,10 @@ struct Archive: View {
                 VStack(spacing: 16) {
 //                    White space, insert other stuff here
                     
-                    
 
-                    
                 }
                 .padding(24)
-                .padding(.bottom, 200)
+                .padding(.bottom, 300)
                 .background(Color.white)
                 .cornerRadius(20)
                 .frame(maxHeight: .infinity, alignment: .top)

@@ -55,7 +55,7 @@ struct Friends: View {
 
                 }
                 .padding(24)
-                .padding(.bottom, 200)
+                .padding(.bottom, 300)
                 .background(Color.white)
                 .cornerRadius(20)
                 .frame(maxHeight: .infinity, alignment: .top)

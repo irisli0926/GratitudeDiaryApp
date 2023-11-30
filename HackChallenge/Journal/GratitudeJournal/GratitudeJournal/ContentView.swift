@@ -27,7 +27,6 @@ struct ContentView: View {
                     if tabSelected == .book {
                         NavigationView {
                             Archive()
-                                .navigationBarTitle("Archive")
                         }
                         .tabItem {
                             Label("Archive", systemImage: "book")
@@ -36,7 +35,6 @@ struct ContentView: View {
                     } else if tabSelected == .paperplane {
                         NavigationView {
                             Journal()
-                                .navigationBarTitle("Journal")
                         }
                         .tabItem {
                             Label("Journal", systemImage: "paperplane")
@@ -45,7 +43,6 @@ struct ContentView: View {
                     } else if tabSelected == .person {
                         NavigationView {
                             Friends()
-                                .navigationBarTitle("Friends")
                         }
                         .tabItem {
                             Label("Friends", systemImage: "person")
