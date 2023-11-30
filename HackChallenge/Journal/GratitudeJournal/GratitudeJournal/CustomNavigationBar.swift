@@ -35,8 +35,7 @@ struct CustomTabBar: View {
     
     
     var body: some View {
-        
-//        design of the navigation bar, check if filled
+
         VStack {
             HStack {
                 ForEach(Tab.allCases, id: \.rawValue) { tab in
@@ -59,8 +58,6 @@ struct CustomTabBar: View {
             .frame(height: 101, alignment: .top)
             .background(Color.black)
             .edgesIgnoringSafeArea(.horizontal)
-         
-            
         }
     }
 }

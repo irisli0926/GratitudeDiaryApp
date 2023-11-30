@@ -13,6 +13,15 @@ struct Journal: View {
     @State private var textFieldCount = 3
     @State private var tabSelected: Tab = .paperplane
     
+    //    init() {
+    //        for familyName in UIFont.familyNames {
+    //            print(familyName)
+    //            for fontName in UIFont.fontNames(forFamilyName: familyName){
+    //                print("--\(fontName)")
+    //            }
+    //        }
+    //    }
+    
     init() {
         UITabBar.appearance().isHidden = true
     }
@@ -88,14 +97,7 @@ struct Journal: View {
 //                Icons
 
             }
-            
-            VStack {
-                Spacer()
-                CustomTabBar(selectedTab: $tabSelected)
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarHidden(true)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationViewStyle(StackNavigationViewStyle())

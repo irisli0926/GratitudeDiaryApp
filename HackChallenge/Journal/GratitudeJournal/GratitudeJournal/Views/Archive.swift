@@ -66,13 +66,6 @@ struct Archive: View {
 
             }
             
-            VStack {
-                Spacer()
-                CustomTabBar(selectedTab: $tabSelected)
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarHidden(true)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationViewStyle(StackNavigationViewStyle())

@@ -61,14 +61,7 @@ struct Friends: View {
                 .frame(maxHeight: .infinity, alignment: .top)
 
             }
-            
-            VStack {
-                Spacer()
-                CustomTabBar(selectedTab: $tabSelected)
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarHidden(true)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationViewStyle(StackNavigationViewStyle())

@@ -5,6 +5,7 @@
 //  Created by Maggie Lam on 11/21/23.
 //
 
+
 import SwiftUI
 
 
@@ -12,42 +13,61 @@ import SwiftUI
 struct ContentView: View {
 
     
-//    init() {
-//        UITabBar.appearance().isHidden = true
-//    }
+    @State private var tabSelected: Tab = .book
     
-//    init() {
-//        for familyName in UIFont.familyNames {
-//            print(familyName)
-//            for fontName in UIFont.fontNames(forFamilyName: familyName){
-//                print("--\(fontName)")
-//            }
-//        }
-//    }
-    
-    @State var selectedTab: Tab = .book
+    init() {
+        UITabBar.appearance().isHidden = true
+    }
 
     var body: some View {
         
-        VStack{
-            Text("Hello World")
+        ZStack {
+            VStack {
+                TabView(selection: $tabSelected) {
+                    if tabSelected == .book {
+                        NavigationView {
+                            Archive()
+                                .navigationBarTitle("Archive")
+                        }
+                        .tabItem {
+                            Label("Archive", systemImage: "book")
+                        }
+                        .tag(Tab.book)
+                    } else if tabSelected == .paperplane {
+                        NavigationView {
+                            Journal()
+                                .navigationBarTitle("Journal")
+                        }
+                        .tabItem {
+                            Label("Journal", systemImage: "paperplane")
+                        }
+                        .tag(Tab.paperplane)
+                    } else if tabSelected == .person {
+                        NavigationView {
+                            Friends()
+                                .navigationBarTitle("Friends")
+                        }
+                        .tabItem {
+                            Label("Friends", systemImage: "person")
+                        }
+                        .tag(Tab.person)
+                    }
+                }
+            }
             
-            Spacer()
             
-            CustomTabBar(selectedTab: $selectedTab)
+            VStack {
+                Spacer()
+                CustomTabBar(selectedTab: $tabSelected)
+            }
+            .edgesIgnoringSafeArea(.bottom)
         }
         
-        
-    
-        
     }
-    
-    
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-        .previewInterfaceOrientation(.portrait)
     }
 }
