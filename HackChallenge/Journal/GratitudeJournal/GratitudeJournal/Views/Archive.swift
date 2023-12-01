@@ -63,7 +63,7 @@ struct Archive: View {
                     
                     
                 }
-                Text("You have written 246 journals")
+                Text("You have written \(calendarEntries.count) journals")
                     .font(Font.custom("KumbhSans-Regular", size: 16))
                     .fontWeight(.medium)
                     .foregroundColor(.white)
