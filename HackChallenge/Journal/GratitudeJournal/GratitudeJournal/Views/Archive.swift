@@ -11,9 +11,9 @@ struct Archive: View {
     
     //dummy data
     let calendarEntries = [
-            (date: "22 Nov", journalCount: 3, mentioned: 1),
-            (date: "23 Nov", journalCount: 4, mentioned: 0),
-            (date: "24 Nov", journalCount: 1, mentioned: 4),
+        (date: "22 Nov", journalCount: 3, mentioned: 1, journals: ["I'm grateful for the unexpected moments of laughter with @Lily and other classmates. It turned a regular study session into a memorable break, reminding me of the joy in simple connections.", "Grateful for the calm campus vibe before Thanksgiving. A moment to reflect amidst the quiet.", "I am grateful for my Starbucks drink. It really keeps me alive."]),
+            (date: "23 Nov", journalCount: 4, mentioned: 0, journals: ["My friend is very  nice.", "happy family", "wonderful trip"]),
+            (date: "24 Nov", journalCount: 1, mentioned: 4, journals: ["ipad", "iphone", "mac air"]),
         ]
     
     @State private var tabSelected: Tab = .book
@@ -27,7 +27,7 @@ struct Archive: View {
             ZStack {
                 Color(.black).ignoresSafeArea()
                 VStack{
-                    blackHeader
+                    header
                     calendarView
                     
                 }
@@ -41,7 +41,7 @@ struct Archive: View {
         
         
     }
-    private var blackHeader: some View {
+    private var header: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 5.0){
                 HStack{
@@ -93,10 +93,9 @@ struct Archive: View {
                                         Text("\(entry.mentioned) mention\(entry.mentioned > 1 ? "s" : "")")
                                             .font(.caption)
                                             .foregroundColor(.white)
-                                            .padding(5)
-                                            .background(Color.black)
+                                            .padding(3)
+                                            .background(Color.gray)
                                             .clipShape(Capsule())
-                                            .padding(.top, 2)
                                     }
                                 }
                                 
@@ -110,9 +109,9 @@ struct Archive: View {
                                             .foregroundColor(.white)
                                     )
                             }
-                            .padding()
                             .frame(maxWidth: .infinity)
-                            .background(Color.gray.opacity(0.2))
+                            .padding()
+                            .background(Color(red: 0.93, green: 0.93, blue: 0.93))
                             .cornerRadius(10)
                         }
                     }
@@ -129,10 +128,80 @@ struct Archive: View {
     Archive()
 }
 
+//pushed page
 struct DetailedPage: View {
-    let entry: (date: String, journalCount: Int, mentioned: Int)
+    
+    let entry: (date: String, journalCount: Int, mentioned: Int, journals: Array<String>)
     
     var body: some View {
-        Text("Detail view for \(entry.date)")
+        ZStack {
+            Color(.black).ignoresSafeArea()
+            VStack{
+                header
+                detailedView
+                
+            }
+            .edgesIgnoringSafeArea(.bottom)
+            .navigationViewStyle(StackNavigationViewStyle())
+            
+        }
+        
+    }
+    
+    private var header: some View {
+        HStack(alignment: .top) {
+            VStack(alignment: .leading, spacing: 5.0){
+                HStack{
+                    Text(entry.date)
+                        .font(Font.custom("KronaOne-Regular", size: 36))
+                        .fontWeight(.bold)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                        .foregroundColor(.white)
+                        .lineLimit(nil)
+                    Spacer()
+                    Image("kid1")
+                        .resizable()
+                        .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                        .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fit/*@END_MENU_TOKEN@*/)
+                        .padding(.all)
+                        .frame(width: 135)
+                    
+                    
+                }
+            }
+        }
+        .padding(.bottom, 24)
+    }
+    
+    private var detailedView: some View {
+        ZStack {
+            Color.white
+                .edgesIgnoringSafeArea(.all)
+            
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing: 16) {
+                    ForEach(entry.journals, id: \.self) { journal in                            HStack {
+                        VStack(alignment: .leading) {
+                            Text(journal)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color(red: 0.93, green: 0.93, blue: 0.93))
+                        .cornerRadius(10)
+                    }
+                    }
+                }
+                .padding()
+            }
+            .cornerRadius(20)
+        }
+        
     }
 }
+    
+
+    
+   
+
+
