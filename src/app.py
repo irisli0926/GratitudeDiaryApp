@@ -30,3 +30,4 @@ def get_users():
     users = [u.serialize() for u in User.query.all()]
     return success_response(users)
 
+
