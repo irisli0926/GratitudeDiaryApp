@@ -32,7 +32,7 @@ struct Friends: View {
         ZStack {
             Color(.black).ignoresSafeArea()
             VStack{
-                //Black Header top
+                //MARK: Black Header top
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 5.0){
                         HStack{
@@ -64,7 +64,7 @@ struct Friends: View {
                 }
                 .padding(.bottom, 24)
                 
-//                White part
+                // MARK: White part
                 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
@@ -90,6 +90,19 @@ struct Friends: View {
                                 .padding(.vertical, 12)
 
                                 Spacer()
+                                
+                                // MARK: delete function insert
+                                Button(action: {
+//                                    users.removeAll(where: { $0.userID == user.userID })
+                                }) {
+                                    Image(systemName: "multiply.circle.fill")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                        .foregroundColor(.black)
+                                }
+                                .padding(.trailing, 8)
+                                .buttonStyle(PlainButtonStyle())
+                                
                             }
                             .padding(12)
                             .frame(maxWidth: .infinity, alignment: .leading)
