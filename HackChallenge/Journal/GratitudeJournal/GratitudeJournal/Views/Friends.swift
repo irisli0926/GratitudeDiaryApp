@@ -19,7 +19,7 @@ struct Friends: View {
     init() {
         UITabBar.appearance().isHidden = true
     }
-    
+    //MARK: Dummy Data
     let users: [User] = [
         User(name: "Alice Kanning", userID: "1234", imageName: "user1"),
         User(name: "Bob Junior", userID: "5678", imageName: "user2"),
@@ -28,6 +28,16 @@ struct Friends: View {
         User(name: "Shinnah Zenh", userID: "7222", imageName: "user5")
     ]
     
+    
+    // MARK: Remove Friend function
+    private func dropFriend(friend : Friend) {
+        
+        NetworkManager.dropFriend(friend: friend) { _ in 
+            ()
+        }
+    }
+    
+
     var body: some View {
         ZStack {
             Color(.black).ignoresSafeArea()
@@ -93,7 +103,8 @@ struct Friends: View {
                                 
                                 // MARK: delete function insert
                                 Button(action: {
-//                                    users.removeAll(where: { $0.userID == user.userID })
+                                    dropFriend(friend: user)
+                                    
                                 }) {
                                     Image(systemName: "multiply.circle.fill")
                                         .resizable()

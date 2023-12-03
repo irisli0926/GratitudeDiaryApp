@@ -16,13 +16,13 @@ class NetworkManager {
     private init() { }
         
     /// Endpoint for dev server
-    private let devEndpoint: String = "insert host here"
+    static private let devEndpoint: String = "insert host here"
     
     // MARK: - Requests
     
 //    fetch post
     
-    func fetchPost(completion: @escaping ([Post]) -> Void) {
+    static func fetchPost(completion: @escaping ([Post]) -> Void) {
         // Specify the endpoint
         let endpoint = "\(devEndpoint)/api/posts/"
 
@@ -47,7 +47,7 @@ class NetworkManager {
     
     
 //    fetch all friends
-    func fetchAllFriends(completion: @escaping ([Friend]) -> Void) {
+    static func fetchAllFriends(completion: @escaping ([Friend]) -> Void) {
         let endpoint = "\(devEndpoint)/api/friends/"
 
         let decoder = JSONDecoder()
@@ -69,7 +69,7 @@ class NetworkManager {
     
 //    add a post to roster
     
-    func createPostManager(post: Post, completion: @escaping (Post) -> Void) {
+    static func createPostManager(post: Post, completion: @escaping (Post) -> Void) {
         // Specify the endpoint
         let endpoint = "\(devEndpoint)/api/posts/"
 
@@ -107,7 +107,7 @@ class NetworkManager {
 
 //      delete friends from roster 
     
-    func dropFriend(friend: Friend, completion: @escaping (Friend?) -> Void) {
+    static func dropFriend(friend: Friend, completion: @escaping (Friend?) -> Void) {
            
         let endpoint = "\(devEndpoint)/api/removeFriend/"
             

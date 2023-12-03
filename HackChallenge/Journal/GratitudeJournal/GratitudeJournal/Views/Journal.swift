@@ -30,7 +30,7 @@ struct Journal: View {
         let message = entries.joined(separator: "\n")
         let newPost = Post(id: UUID().uuidString, message: message, time: Date())
                 
-        NetworkManager.shared.createPostManager(post: newPost) { post in
+        NetworkManager.createPostManager(post: newPost) { post in
             if post.id != "" {
                 print("Post created successfully!")
                 self.entries = Array(repeating: "", count: self.textFieldCount)
