@@ -45,6 +45,28 @@ class NetworkManager {
             }
     }
     
+    
+//    fetch all friends
+    func fetchAllFriends(completion: @escaping ([Friend]) -> Void) {
+        let endpoint = "\(devEndpoint)/api/friends/"
+
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+
+        AF.request(endpoint, method: .get)
+            .validate()
+            .responseDecodable(of: [Friend].self, decoder: decoder) { response in
+                switch response.result {
+                case .success(let friends):
+                    print("Successfully fetched \(friends.count) friends")
+                    completion(friends)
+                case .failure(let error):
+                    print("Error in NetworkManager.fetchAllFriends: \(error.localizedDescription)")
+                    completion([])
+                }
+            }
+    }
+    
 //    add a post to roster
     
     func createPostManager(post: Post, completion: @escaping (Post) -> Void) {
@@ -81,9 +103,7 @@ class NetworkManager {
     
     
     }
-    
-//    fetch all friends
-    
+
 
 //      delete friends from roster 
     
