@@ -13,26 +13,41 @@ struct Journal: View {
     @State private var textFieldCount = 3
     @State private var tabSelected: Tab = .paperplane
     
-    //    init() {
-    //        for familyName in UIFont.familyNames {
-    //            print(familyName)
-    //            for fontName in UIFont.fontNames(forFamilyName: familyName){
-    //                print("--\(fontName)")
-    //            }
-    //        }
-    //    }
     
     init() {
         UITabBar.appearance().isHidden = true
     }
     
+    // MARK: Black header data
+    var formattedDate: String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "EEEE, d MMM, yyyy"
+            return dateFormatter.string(from: Date())
+        }
+    
+    // MARK: Create post to post
+    private func createPost() {
+        let message = entries.joined(separator: "\n")
+        let newPost = Post(id: UUID().uuidString, message: message, time: Date())
+                
+        NetworkManager.createPostManager(post: newPost) { post in
+            if post.id != "" {
+                print("Post created successfully!")
+                self.entries = Array(repeating: "", count: self.textFieldCount)
+            } else {
+                print("Failed to create post.")
+            }
+        }
+    }
+    
+    
+    
     var body: some View {
-        
         
         ZStack {
             Color(.black).ignoresSafeArea()
             VStack{
-//                Header top
+                // MARK: BLACK HEADER TOP
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 5.0){
                         HStack{
@@ -54,7 +69,7 @@ struct Journal: View {
                             
                             
                         }
-                        Text("Thursday, 23 Nov, 2023")
+                        Text(formattedDate)
                             .font(Font.custom("KumbhSans-Regular", size: 16))
                             .fontWeight(.medium)
                             .foregroundColor(.white)
@@ -64,6 +79,8 @@ struct Journal: View {
                 }
                 .padding(.bottom, 24)
                 
+                
+                // MARK: SCROLLABLE WHITE INTERFACE
                 ScrollView {
                     ZStack{
                         VStack(spacing: 16) {
@@ -110,10 +127,25 @@ struct Journal: View {
                             
                             
                             
-                            
+                            // MARK: BUTTONS - ADD MORE POST/POST ENTRIES
                             VStack {
                                 HStack {
-                                    Spacer()
+                        
+                                    Button(action: {
+                                        createPost() // Trigger createPost() function when the "Post" button is pressed
+                                    }) {
+                                        Text("Post Your Entries")
+                                            .font(Font.custom("KumbhSans-Regular", size: 20))
+                                            .fontWeight(.black)
+                                            .foregroundColor(.black)
+                                            .padding(.horizontal, 64)
+                                            .padding(.vertical, 16)
+                                            .background(Color(red: 0.85, green: 0.78, blue: 0.98))
+                                            .cornerRadius(8)
+                                    }
+                                    .frame(maxWidth: .infinity)
+
+                                    
                                     Button(action: {
                                         textFieldCount += 1
                                         entries.append("")
@@ -124,8 +156,6 @@ struct Journal: View {
                                             .foregroundColor(.black)
                                         
                                     }
-                                    
-                                
                                 }
                                 
                             }

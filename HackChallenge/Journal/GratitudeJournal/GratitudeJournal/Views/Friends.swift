@@ -19,7 +19,7 @@ struct Friends: View {
     init() {
         UITabBar.appearance().isHidden = true
     }
-    
+    //MARK: Dummy Data
     let users: [User] = [
         User(name: "Alice Kanning", userID: "1234", imageName: "user1"),
         User(name: "Bob Junior", userID: "5678", imageName: "user2"),
@@ -28,11 +28,21 @@ struct Friends: View {
         User(name: "Shinnah Zenh", userID: "7222", imageName: "user5")
     ]
     
+    
+    // MARK: Remove Friend function
+    private func dropFriend(friend : Friend) {
+        
+        NetworkManager.dropFriend(friend: friend) { _ in 
+            ()
+        }
+    }
+    
+
     var body: some View {
         ZStack {
             Color(.black).ignoresSafeArea()
             VStack{
-                //Black Header top
+                //MARK: Black Header top
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 5.0){
                         HStack{
@@ -64,7 +74,7 @@ struct Friends: View {
                 }
                 .padding(.bottom, 24)
                 
-//                White part
+                // MARK: White part
                 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
@@ -90,6 +100,20 @@ struct Friends: View {
                                 .padding(.vertical, 12)
 
                                 Spacer()
+                                
+                                // MARK: delete function insert
+                                Button(action: {
+                                    dropFriend(friend: user)
+                                    
+                                }) {
+                                    Image(systemName: "multiply.circle.fill")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                        .foregroundColor(.black)
+                                }
+                                .padding(.trailing, 8)
+                                .buttonStyle(PlainButtonStyle())
+                                
                             }
                             .padding(12)
                             .frame(maxWidth: .infinity, alignment: .leading)

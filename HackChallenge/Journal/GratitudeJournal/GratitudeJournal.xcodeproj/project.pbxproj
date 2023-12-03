@@ -17,6 +17,9 @@
 		51BA7FD32B17FF2E008936E5 /* Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BA7FD22B17FF2E008936E5 /* Archive.swift */; };
 		51BA7FD52B180004008936E5 /* Journal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BA7FD42B180004008936E5 /* Journal.swift */; };
 		51BA7FD72B1801B8008936E5 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BA7FD62B1801B8008936E5 /* Friends.swift */; };
+		51BA7FDC2B1D114B008936E5 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BA7FDB2B1D114B008936E5 /* NetworkManager.swift */; };
+		51BA7FDF2B1D1412008936E5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 51BA7FDE2B1D1412008936E5 /* Alamofire */; };
+		51BA7FE22B1D16A2008936E5 /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BA7FE12B1D16A2008936E5 /* model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,8 @@
 		51BA7FD22B17FF2E008936E5 /* Archive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Archive.swift; sourceTree = "<group>"; };
 		51BA7FD42B180004008936E5 /* Journal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journal.swift; sourceTree = "<group>"; };
 		51BA7FD62B1801B8008936E5 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
+		51BA7FDB2B1D114B008936E5 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		51BA7FE12B1D16A2008936E5 /* model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51BA7FDF2B1D1412008936E5 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +76,8 @@
 				51BA7FBC2B0C9735008936E5 /* GratitudeJournalApp.swift */,
 				51BA7FD12B17FF0F008936E5 /* Views */,
 				51BA7FBE2B0C9735008936E5 /* ContentView.swift */,
+				51BA7FE02B1D168D008936E5 /* Model */,
+				51BA7FDA2B1D1135008936E5 /* Networking */,
 				51BA7FCA2B0CACA9008936E5 /* CustomNavigationBar.swift */,
 				51BA7FC02B0C9738008936E5 /* Assets.xcassets */,
 				51BA7FC22B0C9738008936E5 /* Preview Content */,
@@ -105,6 +113,22 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		51BA7FDA2B1D1135008936E5 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				51BA7FDB2B1D114B008936E5 /* NetworkManager.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		51BA7FE02B1D168D008936E5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				51BA7FE12B1D16A2008936E5 /* model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -121,6 +145,9 @@
 			dependencies = (
 			);
 			name = GratitudeJournal;
+			packageProductDependencies = (
+				51BA7FDE2B1D1412008936E5 /* Alamofire */,
+			);
 			productName = GratitudeJournal;
 			productReference = 51BA7FB92B0C9735008936E5 /* GratitudeJournal.app */;
 			productType = "com.apple.product-type.application";
@@ -149,6 +176,9 @@
 				Base,
 			);
 			mainGroup = 51BA7FB02B0C9735008936E5;
+			packageReferences = (
+				51BA7FDD2B1D1412008936E5 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 51BA7FBA2B0C9735008936E5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -178,10 +208,12 @@
 			files = (
 				51BA7FCB2B0CACA9008936E5 /* CustomNavigationBar.swift in Sources */,
 				51BA7FD72B1801B8008936E5 /* Friends.swift in Sources */,
+				51BA7FDC2B1D114B008936E5 /* NetworkManager.swift in Sources */,
 				0F2033B52B193D2300B95A5E /* JournalEntry.swift in Sources */,
 				51BA7FD52B180004008936E5 /* Journal.swift in Sources */,
 				51BA7FBF2B0C9735008936E5 /* ContentView.swift in Sources */,
 				51BA7FD32B17FF2E008936E5 /* Archive.swift in Sources */,
+				51BA7FE22B1D16A2008936E5 /* model.swift in Sources */,
 				51BA7FBD2B0C9735008936E5 /* GratitudeJournalApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,6 +422,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		51BA7FDD2B1D1412008936E5 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		51BA7FDE2B1D1412008936E5 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 51BA7FDD2B1D1412008936E5 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 51BA7FB12B0C9735008936E5 /* Project object */;
 }
