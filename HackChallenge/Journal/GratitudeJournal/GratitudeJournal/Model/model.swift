@@ -13,3 +13,12 @@ public struct Post: Codable {
     let time: Date
     
 }
+
+public struct Friend: Codable {
+    let id: String
+    let name: String
+    let user_id: String
+    let message: String
+    let time: Date
+    
+}

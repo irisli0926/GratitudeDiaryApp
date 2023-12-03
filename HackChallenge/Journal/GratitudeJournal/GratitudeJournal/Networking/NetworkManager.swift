@@ -20,7 +20,7 @@ class NetworkManager {
     
     // MARK: - Requests
     
-//    fetch post from backend
+//    fetch post
     
     func fetchPost(completion: @escaping ([Post]) -> Void) {
         // Specify the endpoint
@@ -81,5 +81,33 @@ class NetworkManager {
     
     
     }
+    
+//    fetch all friends
+    
+
+//      delete friends from roster 
+    
+    func dropFriend(friend: Friend, completion: @escaping (Friend?) -> Void) {
+           
+        let endpoint = "\(devEndpoint)/api/removeFriend/"
+            
+        let parameters: Parameters = [
+            "id": friend.id
+        ]
+        
+        AF.request(endpoint, method: .post, parameters: parameters)
+        .validate()
+        .responseDecodable(of: Friend.self) { response in
+            switch response.result {
+            case .success(let removedFriend):
+                print("Successfully removed friend with ID: \(removedFriend.id)")
+                completion(removedFriend)
+            case .failure(let error):
+                print("Error in NetworkManager.dropFriend: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+       
+   }
     
 }
