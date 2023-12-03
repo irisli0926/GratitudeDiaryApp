@@ -13,21 +13,38 @@ struct Journal: View {
     @State private var textFieldCount = 3
     @State private var tabSelected: Tab = .paperplane
     
-    //    init() {
-    //        for familyName in UIFont.familyNames {
-    //            print(familyName)
-    //            for fontName in UIFont.fontNames(forFamilyName: familyName){
-    //                print("--\(fontName)")
-    //            }
-    //        }
-    //    }
     
     init() {
         UITabBar.appearance().isHidden = true
     }
     
-    var body: some View {
+    var formattedDate: String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "EEEE, d MMM, yyyy"
+            return dateFormatter.string(from: Date())
+        }
+    
+    private func createPost() {
+        // TODO: Send a POST request to create a post
+        let message = entries.joined(separator: "\n")
         
+        let newPost = Post(id: UUID().uuidString, message: message, time: Date())
+                
+        NetworkManager.shared.createPostManager(post: newPost) { post in
+            if post.id != "" {
+                print("Post created successfully!")
+                self.entries = Array(repeating: "", count: self.textFieldCount)
+//                self.entries = ["", "", ""] // Resetting text fields for example
+//                self.textFieldCount = 3
+            } else {
+                print("Failed to create post.")
+            }
+        }
+    }
+    
+    
+    
+    var body: some View {
         
         ZStack {
             Color(.black).ignoresSafeArea()
@@ -54,7 +71,7 @@ struct Journal: View {
                             
                             
                         }
-                        Text("Thursday, 23 Nov, 2023")
+                        Text(formattedDate)
                             .font(Font.custom("KumbhSans-Regular", size: 16))
                             .fontWeight(.medium)
                             .foregroundColor(.white)
@@ -113,7 +130,22 @@ struct Journal: View {
                             
                             VStack {
                                 HStack {
-                                    Spacer()
+                                    
+                                    Button(action: {
+                                        createPost() // Trigger createPost() function when the "Post" button is pressed
+                                    }) {
+                                        Text("Post Your Entries")
+                                            .font(Font.custom("KumbhSans-Regular", size: 20))
+                                            .fontWeight(.black)
+                                            .foregroundColor(.black)
+                                            .padding(.horizontal, 64)
+                                            .padding(.vertical, 16)
+                                            .background(Color(red: 0.85, green: 0.78, blue: 0.98))
+                                            .cornerRadius(8)
+                                    }
+                                    .frame(maxWidth: .infinity)
+
+                                    
                                     Button(action: {
                                         textFieldCount += 1
                                         entries.append("")
