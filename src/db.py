@@ -1,101 +1,134 @@
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
-import sqlite3
+import datetime
 
 db = SQLAlchemy()
 
-class User(db.Model):
-    __tablename__ = "user"
+# association_table = db.Table("association", db.Model.metadata,
+#     db.Column("course_id", db.Integer, db.ForeignKey("course.id")),
+#     db.Column("user_id", db.Integer, db.ForeignKey("user.id")),
+# )
 
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True, nullable=False)
-    password_hash = db.Column(db.String(128), nullable=False)
-    email = db.Column(db.String(120), index=True, unique=True, nullable=False)
+# new_association_table = db.Table("new_association", db.Model.metadata,
+#     db.Column("course_id", db.Integer, db.ForeignKey("course.id")),
+#     db.Column("user_id", db.Integer, db.ForeignKey("user.id")),
+# )
+
+# assoc_assignment = db.Table("new_association_2", db.Model.metadata,
+#     db.Column("course_id", db.Integer, db.ForeignKey("course.id")),
+# )
+
+# # your classes here
+# class Course(db.Model):
+#     """
+#     Course model
+#     """
+#     __tablename__ = "course"
+#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+#     code = db.Column(db.String, nullable=False)
+#     name = db.Column(db.String, nullable=False)
+#     assignments = db.relationship("Assignment", cascade = "delete")
+#     instructors = db.relationship("User", secondary=association_table, back_populates="teaching_courses")
+#     students = db.relationship("User", secondary=new_association_table, back_populates="enrolled_courses")
+#     #     assignments = db.relationship("Assignment", cascade="delete") 
+#     # instructors = db.relationship("User", secondary=association_table)
+#     # students = db.relationship("User", secondary=association_table)
+
+#     def __init__(self, **kwargs):
+#         self.code = kwargs.get("code")
+#         self.name = kwargs.get("name")
+#         # self.assignments = kwargs.get("assignments", "") 
+#         # self.instructors = kwargs.get("instructors") 
+#         # self.students = kwargs.get("students") 
+
+#     def serialize(self):
+#         return {
+#             "id": self.id,
+#             "code": self.code,
+#             "name": self.name,
+#             "assignments": [a.simple_serialize() for a in self.assignments],
+#             "instructors": [a.simple_serialize() for a in self.instructors], 
+#             "students": [a.simple_serialize() for a in self.students]
+#             # "assignments": [a.simple_serialize() for a in self.assignments],
+#             # "instructors": [a.simple_serialize() for a in self.students],
+#             # "students": [a.simple_serialize() for a in self.students]
+#             # "assignments": [],
+#             # "instructors": [],
+#             # "students": []
+            
+#         }
+    
+#     def simple_serialize(self):
+#         return {
+#             "id": self.id,
+#             "code": self.code,
+#             "name": self.name,
+#         }
+
+class User(db.Model):
+    """
+    User model
+    """
+    __tablename__ = "user"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String, nullable=False)
+    username = db.Column(db.String, nullable=False)
     entries = db.relationship('Entry', cascade="delete")
-    messages_sent = db.relationship('GratitudeMessage', cascade="delete")
-    messages_received = db.relationship('GratitudeMessage', cascade="delete")
-    # friends = db.relationship('User', secondary='friends', primaryjoin=(friends.c.user_id == id), secondaryjoin=(friends.c.friend_id == id), backref=db.backref('friends', lazy='dynamic'), lazy='dynamic')
 
     def __init__(self, **kwargs):
-        self.username = kwargs.get('username')
-        self.password_hash = kwargs.get('password_hash')
-        self.email = kwargs.get('email')
+        self.name = kwargs.get("name")
+        self.username = kwargs.get("username") 
+        # self.courses = kwargs.get("courses") 
 
     def serialize(self):
         return {
             "id": self.id,
+            "name": self.name,
             "username": self.username,
-            "email": self.email,
-            "entries": [entry.simple_serialize() for entry in self.entries],
-            "messages_sent": [message.simple_serialize() for message in self.messages_sent],
-            "messages_received": [message.simple_serialize() for message in self.messages_received]
-            # "friends": [friend.simple_serialize() for friend in self.friends]
+            "entries": [a.simple_serialize() for a in self.entries]
+        }
+    
+    def simple_serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "username": self.username,
         }
 
 class Entry(db.Model):
+    """
+    Assignment model
+    """
     __tablename__ = "entry"
-
-    id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.String(500), nullable=False)
-    timestamp = db.Column(db.DateTime, server_default=db.func.now(), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-    def __init__(self, **kwargs):
-        # super(Entry, self).__init__(**kwargs)
-        self.text = kwargs.get('text')
-        self.user_id = kwargs.get('user_id')
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "text": self.text,
-            "timestamp": self.timestamp.isoformat(),
-            "user_id": self.user_id
-        }
-
-    def simple_serialize(self):
-        return {
-            "id": self.id,
-            "text": self.text,
-            "timestamp": self.timestamp.isoformat()
-        }
-
-class GratitudeMessage(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.String(500), nullable=False)
-    timestamp = db.Column(db.DateTime, server_default=db.func.now(), nullable=False)
-    sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    recipient_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    text = db.Column(db.String, nullable=False)
+    timestamp = db.Column(db.String, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    # course = db.relationship("Course", secondary=assoc_assignment, back_populates='assignments')
 
     def __init__(self, **kwargs):
-        self.text = kwargs.get('text')
-        self.sender_id = kwargs.get('sender_id')
-        self.recipient_id = kwargs.get('recipient_id')
+        self.text = kwargs.get("text")
+        self.timestamp = kwargs.get("timestamp") 
+        self.timestamp = datetime.datetime.now().isoformat() 
+        self.user_id = kwargs.get("user_id")
+        # self.course_id = kwargs.get("course_id", "")
 
     def serialize(self):
+        user = User.query.filter_by(id=self.user_id).first()
         return {
             "id": self.id,
             "text": self.text,
-            "timestamp": self.timestamp.isoformat(),
-            "sender_id": self.sender_id,
-            "recipient_id": self.recipient_id
+            "timestamp": self.timestamp,
+            "user": user.simple_serialize()
+            # "course_id": [a.serialize() for a in self.courses]
         }
     
     def simple_serialize(self):
         return {
             "id": self.id,
             "text": self.text,
-            "timestamp": self.timestamp.isoformat(),
-            # "sender_id": self.sender_id,
-            # "recipient_id": self.recipient_id
+            "timestamp": self.timestamp,
         }
-    
-    # def get_message_by_id():
-    #     return {
 
-    #     }
 
-# friends = db.Table('friends',
-#     db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
-#     db.Column('friend_id', db.Integer, db.ForeignKey('user.id'), primary_key=True)
-# )
+
+
