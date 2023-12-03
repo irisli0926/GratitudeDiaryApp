@@ -18,24 +18,22 @@ struct Journal: View {
         UITabBar.appearance().isHidden = true
     }
     
+    // MARK: Black header data
     var formattedDate: String {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "EEEE, d MMM, yyyy"
             return dateFormatter.string(from: Date())
         }
     
+    // MARK: Create post to post
     private func createPost() {
-        // TODO: Send a POST request to create a post
         let message = entries.joined(separator: "\n")
-        
         let newPost = Post(id: UUID().uuidString, message: message, time: Date())
                 
         NetworkManager.shared.createPostManager(post: newPost) { post in
             if post.id != "" {
                 print("Post created successfully!")
                 self.entries = Array(repeating: "", count: self.textFieldCount)
-//                self.entries = ["", "", ""] // Resetting text fields for example
-//                self.textFieldCount = 3
             } else {
                 print("Failed to create post.")
             }
@@ -49,7 +47,7 @@ struct Journal: View {
         ZStack {
             Color(.black).ignoresSafeArea()
             VStack{
-//                Header top
+                // MARK: BLACK HEADER TOP
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 5.0){
                         HStack{
@@ -81,6 +79,8 @@ struct Journal: View {
                 }
                 .padding(.bottom, 24)
                 
+                
+                // MARK: SCROLLABLE WHITE INTERFACE
                 ScrollView {
                     ZStack{
                         VStack(spacing: 16) {
@@ -127,10 +127,10 @@ struct Journal: View {
                             
                             
                             
-                            
+                            // MARK: BUTTONS - ADD MORE POST/POST ENTRIES
                             VStack {
                                 HStack {
-                                    
+                        
                                     Button(action: {
                                         createPost() // Trigger createPost() function when the "Post" button is pressed
                                     }) {
@@ -156,8 +156,6 @@ struct Journal: View {
                                             .foregroundColor(.black)
                                         
                                     }
-                                    
-                                
                                 }
                                 
                             }
