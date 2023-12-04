@@ -9,12 +9,16 @@ import Foundation
 
 public struct Post: Codable {
     let id: String
-    let message: String
+    let journals: String
+    let mentioned: Int
+    let journalCount: Int
     let date: Date
     
-    public init(id: String, message: String, dateString: String) {
+    public init(id: String, journals: String, mentioned: Int, journalCount: Int, dateString: String) {
         self.id = id
-        self.message = message
+        self.journals = journals
+        self.mentioned = mentioned
+        self.journalCount = journalCount
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE, d MMM, yyyy"

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct Archive: View {
     
+    
+    
     //dummy data
     let calendarEntries = [
         (date: "22 Nov", journalCount: 3, mentioned: 1, journals: ["I'm grateful for the unexpected moments of laughter with @Lily and other classmates. It turned a regular study session into a memorable break, reminding me of the joy in simple connections.", "Grateful for the calm campus vibe before Thanksgiving. A moment to reflect amidst the quiet.", "I am grateful for my Starbucks drink. It really keeps me alive."]),
@@ -117,6 +119,7 @@ struct Archive: View {
                 }
                 .padding()
             }
+            
         }
         .cornerRadius(20)
     }
