@@ -70,27 +70,21 @@ class NetworkManager {
 //    add a post to roster
     
     static func createPostManager(post: Post, completion: @escaping (Post) -> Void) {
-        // Specify the endpoint
         let endpoint = "\(devEndpoint)/api/users/<int:id>/entry"
 
-        // Define the request body
         let parameters: Parameters = [
             "id": post.id,
             "time": post.date,
             "message": post.message
             
         ]
-
-        // Create a decoder
         let decoder = JSONDecoder()
          decoder.dateDecodingStrategy = .iso8601 // Only if needed
 //             decoder.keyDecodingStrategy = .convertFromSnakeCase // Only if needed
-    
-        // Create the request
+
         AF.request(endpoint, method: .post, parameters: parameters)
         .validate()
         .responseDecodable(of: Post.self, decoder: decoder) { response in
-            // Handle the response
             switch response.result {
                 case .success(let addedPost):
                     print("Successfully added post with message: \(addedPost.message)")

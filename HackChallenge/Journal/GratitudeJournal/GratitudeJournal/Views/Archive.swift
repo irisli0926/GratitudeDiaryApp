@@ -38,8 +38,6 @@ struct Archive: View {
         }
         
         
-        
-        
     }
     private var header: some View {
         HStack(alignment: .top) {
@@ -92,10 +90,11 @@ struct Archive: View {
                                     if entry.mentioned > 0 {
                                         Text("\(entry.mentioned) mention\(entry.mentioned > 1 ? "s" : "")")
                                             .font(.caption)
-                                            .foregroundColor(.white)
-                                            .padding(3)
-                                            .background(Color.gray)
-                                            .clipShape(Capsule())
+                                            .foregroundColor(.black)
+                                            .padding(8)
+                                            .background(Color(red: 0.85, green: 0.78, blue: 0.98))
+                                            .cornerRadius(10)
+                                            
                                     }
                                 }
                                 

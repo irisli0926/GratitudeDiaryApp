@@ -99,15 +99,7 @@ struct Journal: View {
                         
                                     
                                         .frame(width: 220, alignment: .topLeading)
-                                    //  Add camera button?
-//                                    Image(systemName: "camera.fill")
-//                                        .resizable()
-//                                        .frame(width: 40, height: 32)
-//                                        .foregroundColor(.black)
-//                                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 20))
-                                    
-                                    
-                                    //add button to remove textfield?
+
                                     Button(action: {
                                         entries.remove(at: index)
                                         textFieldCount -= 1

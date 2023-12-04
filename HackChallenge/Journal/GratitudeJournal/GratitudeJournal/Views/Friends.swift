@@ -46,18 +46,17 @@ struct Friends: View {
     
     
     // MARK: Remove Friend function
-//    private func dropFriend(_ friend: Friend) {
-//        NetworkManager.dropFriend(friend: friend) { removedFriend in
-//            if let removedFriend = removedFriend {
-//                if let index = users.firstIndex(where: { $0.userID == removedFriend.id }) {
-//                    users.remove(at: index)
-//                }
-//            } else {
-//                print("Failed to remove friend.")
-//                // Handle failure, e.g., show an error message
-//            }
-//        }
-//    }
+    private func dropFriend(_ friend: Friend) {
+        NetworkManager.dropFriend(friend: friend) { removedFriend in
+            if let removedFriend = removedFriend {
+                if let index = self.users.firstIndex(where: { $0.userID == removedFriend.id }) {
+                    self.users.remove(at: index)
+                }
+            } else {
+                print("Failed to remove friend.")
+            }
+        }
+    }
     
 
     var body: some View {
@@ -129,17 +128,17 @@ struct Friends: View {
                                 Spacer()
                                 
                                 // MARK: delete function insert
-//                                Button(action: {
-////                                    self.dropFriend(friend: user)
-//                                    
-//                                }) {
-//                                    Image(systemName: "multiply.circle.fill")
-//                                        .resizable()
-//                                        .frame(width: 30, height: 30)
-//                                        .foregroundColor(.black)
-//                                }
-//                                .padding(.trailing, 8)
-//                                .buttonStyle(PlainButtonStyle())
+                                Button(action: {
+                                    self.dropFriend(user)
+                                    
+                                }) {
+                                    Image(systemName: "multiply.circle.fill")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                        .foregroundColor(.black)
+                                }
+                                .padding(.trailing, 8)
+                                .buttonStyle(PlainButtonStyle())
                                 
                             }
                             .padding(12)
