@@ -72,11 +72,13 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String, nullable=False)
     username = db.Column(db.String, nullable=False)
+    image = db.Column(db.String, nullable=False)
     entries = db.relationship('Entry', cascade="delete")
 
     def __init__(self, **kwargs):
         self.name = kwargs.get("name")
         self.username = kwargs.get("username") 
+        self.image = kwargs.get("image") 
         # self.courses = kwargs.get("courses") 
 
     def serialize(self):
@@ -84,6 +86,7 @@ class User(db.Model):
             "id": self.id,
             "name": self.name,
             "username": self.username,
+            "image": self.image,
             "entries": [a.simple_serialize() for a in self.entries]
         }
     
@@ -92,6 +95,7 @@ class User(db.Model):
             "id": self.id,
             "name": self.name,
             "username": self.username,
+            "image": self.image,
         }
 
 class Entry(db.Model):
@@ -101,14 +105,13 @@ class Entry(db.Model):
     __tablename__ = "entry"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     text = db.Column(db.String, nullable=False)
-    timestamp = db.Column(db.String, nullable=False)
+    # timestamp = db.Column(db.DateTime, default=datetime.datetime.utcnow, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     # course = db.relationship("Course", secondary=assoc_assignment, back_populates='assignments')
 
     def __init__(self, **kwargs):
         self.text = kwargs.get("text")
-        self.timestamp = kwargs.get("timestamp") 
-        self.timestamp = datetime.datetime.now().isoformat() 
+        # self.timestamp = datetime.datetime.now().isoformat() 
         self.user_id = kwargs.get("user_id")
         # self.course_id = kwargs.get("course_id", "")
 
@@ -117,7 +120,7 @@ class Entry(db.Model):
         return {
             "id": self.id,
             "text": self.text,
-            "timestamp": self.timestamp,
+            "timestamp": datetime.datetime.now().isoformat() ,
             "user": user.simple_serialize()
             # "course_id": [a.serialize() for a in self.courses]
         }
@@ -126,7 +129,7 @@ class Entry(db.Model):
         return {
             "id": self.id,
             "text": self.text,
-            "timestamp": self.timestamp,
+            "timestamp": datetime.datetime.now().isoformat() ,
         }
 
 

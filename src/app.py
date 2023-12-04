@@ -1,7 +1,7 @@
 import json 
 from db import db
 from flask import Flask, request
-# from db import Course
+from db import Entry
 from db import User
 # from db import Assignment
 # from db import User
@@ -36,8 +36,9 @@ def get_users():
 def create_task():
    body = json.loads(request.data)
    new_user = User(
+       name=body.get('name'),
        username=body.get('username'),
-       email=body.get('email')
+       image=body.get('image')
    )
    db.session.add(new_user)
    db.session.commit()
@@ -60,6 +61,32 @@ def delete_course(id):
    db.session.delete(task)
    db.session.commit()
    return success_response(task.serialize())
+
+@app.route("/api/users/<int:id>/entry", methods=["POST"])
+def create_entry(id):
+    body = json.loads(request.data)
+    new_user = Entry(
+       text=body.get('text'),
+    #    timestamp=body.get('text'),
+       user_id= id
+   )
+    db.session.add(new_user)
+    db.session.commit()
+    return success_response(new_user.serialize(), 201)
+
+@app.route("/api/users/<int:id>/entry")
+def get_entries(id):
+    entry = [t.serialize() for t in Entry.query.all()]
+    return success_response({"entries": entry})
+
+# get entry by id
+@app.route("/api/entry/<int:id>")
+def get_entry(id):
+   task = Entry.query.filter_by(id=id).first()
+   if task is None:
+       return failure_response("Entry not found!")
+   return success_response(task.serialize())
+
 
 # @app.route("/api/courses/<int:id>/add/", methods=["POST"])
 # def add_user(id):
