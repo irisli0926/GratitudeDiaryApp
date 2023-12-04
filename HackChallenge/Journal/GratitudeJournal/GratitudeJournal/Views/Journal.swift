@@ -27,8 +27,8 @@ struct Journal: View {
     
     // MARK: Create post to post
     private func createPost() {
-        let message = entries.joined(separator: "\n")
-        let newPost = Post(id: UUID().uuidString, message: message, dateString: formattedDate)
+        let journals = entries.joined(separator: "\n")
+        let newPost = Post(id: UUID().uuidString, journals: journals, mentioned: 0, journalCount: 0, dateString: formattedDate)
                 
         NetworkManager.createPostManager(post: newPost) { post in
             if post.id != "" {

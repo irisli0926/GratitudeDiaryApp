@@ -75,7 +75,7 @@ class NetworkManager {
         let parameters: Parameters = [
             "id": post.id,
             "time": post.date,
-            "message": post.message
+            "journals": post.journals
             
         ]
         let decoder = JSONDecoder()
@@ -87,7 +87,7 @@ class NetworkManager {
         .responseDecodable(of: Post.self, decoder: decoder) { response in
             switch response.result {
                 case .success(let addedPost):
-                    print("Successfully added post with message: \(addedPost.message)")
+                    print("Successfully added post with journals: \(addedPost.journals)")
                     completion(addedPost)
                 case .failure(let error):
                     print("Error in NetworkManager.addPost: \(error.localizedDescription)")
