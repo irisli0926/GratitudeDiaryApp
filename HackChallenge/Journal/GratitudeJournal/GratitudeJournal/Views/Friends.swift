@@ -20,22 +20,45 @@ struct Friends: View {
         UITabBar.appearance().isHidden = true
     }
     //MARK: Dummy Data
-    let users: [User] = [
-        User(name: "Alice Kanning", userID: "1234", imageName: "user1"),
-        User(name: "Bob Junior", userID: "5678", imageName: "user2"),
-        User(name: "Karen Smith", userID: "9008", imageName: "user3"),
-        User(name: "Babpy Wish", userID: "6738", imageName: "user4"),
-        User(name: "Shinnah Zenh", userID: "7222", imageName: "user5")
+    private var users: [Friend] = [
+    
+        Friend(id: "1" ,name: "Alice Kanning", userID: "1234", imageUrl: "https://images.squarespace-cdn.com/content/v1/5cfb0f8783523500013c5639/9a517ea4-31a7-4b38-81f4-076c7f36baf4/Professional-Headshot-Vancouver"),
+        Friend(id: "2" ,name: "Bob Junior", userID: "5678", imageUrl: "https://images.squarespace-cdn.com/content/v1/5b0d699912b13f380330110a/1547220685644-XG1WKFAWCRTTO9M5X2S3/1-3.jpg"),
+        Friend(id: "3" ,name: "Karen Smith", userID: "9008", imageUrl: "https://i.pinimg.com/550x/bc/6d/d8/bc6dd84ab48f40e09f5b4f0409c5471c.jpg"),
+        Friend(id: "4" ,name: "Babpy Wish", userID: "6738", imageUrl: "https://images.squarespace-cdn.com/content/v1/5f7359b579e51a7d39e29bbf/1684070707323-4NH40PM6NBAGXKEXONLT/best-black-actor-headshot-nyc-hancock-headshots-015.jpeg"),
+        Friend(id: "5" ,name: "Shinnah Zenh", userID: "7222", imageUrl: "https://images.squarespace-cdn.com/content/v1/5747b95c8a65e22d87e2be51/9f437695-3351-4cba-b69d-83e16012b6d7/Giovanni%2BThe%2BPhotographer%2BBest%2BBoston%2BHeadshot%2BStudio%2BProfessional%2BFashion%2BModel%2BPhotography.jpg")
     ]
     
     
+    //MARK: fetch friends
+//    private func fetchAllFriends() {
+//        NetworkManager.fetchAllFriends { [weak self] friends in
+//            guard let self = self else { return }
+//            // Assuming self.friends is a property in your view controller
+//            self.users = friends
+//
+//            
+//            // Perform UI updates on the main queue
+//            DispatchQueue.main.async {
+//                // Update your UI with fetched friends data here
+//            }
+//        }
+//    }
+    
+    
     // MARK: Remove Friend function
-    private func dropFriend(friend : Friend) {
-        
-        NetworkManager.dropFriend(friend: friend) { _ in 
-            ()
-        }
-    }
+//    private func dropFriend(_ friend: Friend) {
+//        NetworkManager.dropFriend(friend: friend) { removedFriend in
+//            if let removedFriend = removedFriend {
+//                if let index = users.firstIndex(where: { $0.userID == removedFriend.id }) {
+//                    users.remove(at: index)
+//                }
+//            } else {
+//                print("Failed to remove friend.")
+//                // Handle failure, e.g., show an error message
+//            }
+//        }
+//    }
     
 
     var body: some View {
@@ -82,12 +105,48 @@ struct Friends: View {
 
                         ForEach(users, id: \.userID) { user in
                             HStack(alignment: .center) {
-                                Image(user.imageName)
-                                    .resizable()
-                                    .frame(width: 50, height: 50)
-                                    .aspectRatio(contentMode: .fit)
-                                    .clipShape(Circle())
-                                    .padding(8)
+//                                Image(user.imageUrl)
+//                                    .resizable()
+//                                    .frame(width: 50, height: 50)
+//                                    .aspectRatio(contentMode: .fit)
+//                                    .clipShape(Circle())
+//                                    .padding(8)
+                                
+                                if let url = URL(string: user.imageUrl) {
+                                    AsyncImage(url: url) { phase in
+                                        switch phase {
+                                        case .empty:
+                                            ProgressView()
+                                                .frame(width: 50, height: 50)
+                                                .clipShape(Circle())
+                                                .padding(8)
+                                        case .success(let image):
+                                            image
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 50, height: 50)
+                                                .clipShape(Circle())
+                                                .padding(8)
+                                        case .failure:
+                                            Image(systemName: "user1")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 50, height: 50)
+                                                .clipShape(Circle())
+                                                .padding(8)
+                                        @unknown default:
+                                            EmptyView()
+                                        }
+                                    }
+                                } else {
+                                    Image(systemName: "user2")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 50, height: 50)
+                                        .clipShape(Circle())
+                                        .padding(8)
+                                }
+//                                -------
 
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(user.name)
@@ -103,7 +162,7 @@ struct Friends: View {
                                 
                                 // MARK: delete function insert
                                 Button(action: {
-                                    dropFriend(friend: user)
+//                                    self.dropFriend(friend: user)
                                     
                                 }) {
                                     Image(systemName: "multiply.circle.fill")

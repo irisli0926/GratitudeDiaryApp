@@ -76,7 +76,7 @@ class NetworkManager {
         // Define the request body
         let parameters: Parameters = [
             "id": post.id,
-            "time": post.time,
+            "time": post.date,
             "message": post.message
             
         ]

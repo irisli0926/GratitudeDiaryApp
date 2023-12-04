@@ -10,15 +10,14 @@ import Foundation
 public struct Post: Codable {
     let id: String
     let message: String
-    let time: Date
+    let date: Date
     
 }
 
 public struct Friend: Codable {
     let id: String
     let name: String
-    let user_id: String
-    let message: String
-    let time: Date
+    let userID: String
+    let imageUrl: String
     
 }
