@@ -14,8 +14,35 @@ struct Archive: View {
     //dummy data
     let calendarEntries = [
         (date: "22 Nov", journalCount: 3, mentioned: 1, journals: ["I'm grateful for the unexpected moments of laughter with @Lily and other classmates. It turned a regular study session into a memorable break, reminding me of the joy in simple connections.", "Grateful for the calm campus vibe before Thanksgiving. A moment to reflect amidst the quiet.", "I am grateful for my Starbucks drink. It really keeps me alive."]),
-            (date: "23 Nov", journalCount: 4, mentioned: 0, journals: ["My friend is very  nice.", "happy family", "wonderful trip"]),
-            (date: "24 Nov", journalCount: 1, mentioned: 4, journals: ["ipad", "iphone", "mac air"]),
+        (date: "23 Nov", journalCount: 4, mentioned: 0, journals: ["My friend is very  nice.", "happy family", "wonderful trip"]),
+        (date: "24 Nov", journalCount: 1, mentioned: 4, journals: ["ipad", "iphone", "mac air"]),
+        
+        ( date: "25 Nov",journalCount: 3, mentioned: 2, journals: [
+            "I'm grateful for my supportive family. Their love and encouragement keep me going every day.",
+            "Grateful for the opportunity to learn new things and improve myself. Constant growth is essential.",
+            "I am grateful for the beautiful sunrise I witnessed today. Nature's beauty is truly awe-inspiring."
+            ]),
+        ( date: "26 Nov", journalCount: 3 , mentioned: 0, journals: [
+            "Today, I'm grateful for the helpful colleagues at work. Collaboration makes tasks easier and more enjoyable.",
+            "Grateful for the delicious home-cooked meal I had with my family. Food has a way of bringing people together.",
+            "I am grateful for the chance to unwind and read a captivating book. Sometimes, a good story is all we need."
+        ]),
+        ( date: "27 Nov", journalCount: 3, mentioned: 3, journals: [
+            "I'm grateful for the supportive friends who are always there for me, especially during tough times.",
+            "Grateful for the progress I've made in achieving my personal goals. Hard work pays off.",
+            "I am grateful for the opportunity to travel and explore new cultures. It broadens my perspective."
+        ]),
+        ( date: "28 Nov", journalCount: 3, mentioned: 1,  journals: [
+            "Today, I'm grateful for the beautiful weather that lifted my spirits and made the day brighter.",
+            "Grateful for the inspiring podcast I listened to today. It motivated me to pursue my passions.",
+            "I am grateful for the cozy moments spent with loved ones. Their presence is comforting."
+        ]),
+        ( date: "3 Dec", journalCount: 3, mentioned: 0,  journals: [
+            "1",
+            "2",
+            "3"
+        ])
+        
         ]
     
     //MARK: Dummy Variables
