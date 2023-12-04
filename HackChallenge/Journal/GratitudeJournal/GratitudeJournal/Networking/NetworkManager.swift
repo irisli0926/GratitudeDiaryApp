@@ -24,7 +24,7 @@ class NetworkManager {
     
     static func fetchPost(completion: @escaping ([Post]) -> Void) {
         // Specify the endpoint
-        let endpoint = "\(devEndpoint)/api/posts/"
+        let endpoint = "\(devEndpoint)/api/users/<int:id>/entry"
 
 //        time deconder
         let decoder = JSONDecoder()
@@ -48,7 +48,7 @@ class NetworkManager {
     
 //    fetch all friends
     static func fetchAllFriends(completion: @escaping ([Friend]) -> Void) {
-        let endpoint = "\(devEndpoint)/api/friends/"
+        let endpoint = "\(devEndpoint)/api/users/"
 
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
@@ -71,7 +71,7 @@ class NetworkManager {
     
     static func createPostManager(post: Post, completion: @escaping (Post) -> Void) {
         // Specify the endpoint
-        let endpoint = "\(devEndpoint)/api/posts/"
+        let endpoint = "\(devEndpoint)/api/users/<int:id>/entry"
 
         // Define the request body
         let parameters: Parameters = [

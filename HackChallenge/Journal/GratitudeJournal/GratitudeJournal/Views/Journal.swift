@@ -20,15 +20,15 @@ struct Journal: View {
     
     // MARK: Black header data
     var formattedDate: String {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "EEEE, d MMM, yyyy"
-            return dateFormatter.string(from: Date())
-        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, d MMM, yyyy"
+        return dateFormatter.string(from: Date())
+    }
     
     // MARK: Create post to post
     private func createPost() {
         let message = entries.joined(separator: "\n")
-        let newPost = Post(id: UUID().uuidString, message: message, time: Date())
+        let newPost = Post(id: UUID().uuidString, message: message, dateString: formattedDate)
                 
         NetworkManager.createPostManager(post: newPost) { post in
             if post.id != "" {

@@ -12,6 +12,20 @@ public struct Post: Codable {
     let message: String
     let date: Date
     
+    public init(id: String, message: String, dateString: String) {
+        self.id = id
+        self.message = message
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, d MMM, yyyy"
+        
+        if let formattedDate = dateFormatter.date(from: dateString) {
+            self.date = formattedDate
+        } else {
+            self.date = Date()
+            print("Failed to parse date. Defaulting to current date.")
+        }
+    }
 }
 
 public struct Friend: Codable {
@@ -19,5 +33,12 @@ public struct Friend: Codable {
     let name: String
     let userID: String
     let imageUrl: String
+    
+    public init(id: String, name: String, userID: String, imageUrl: String) {
+            self.id = id
+            self.name = name
+            self.userID = userID
+            self.imageUrl = imageUrl
+        }
     
 }
