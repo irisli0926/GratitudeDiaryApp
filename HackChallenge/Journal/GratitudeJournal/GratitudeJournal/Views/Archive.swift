@@ -186,9 +186,12 @@ struct Archive: View {
                             .cornerRadius(10)
                         }
                     }
+                    
                 }
                 .padding()
+                .padding(.bottom, 200)
             }
+            
             
         }
         .cornerRadius(20)
