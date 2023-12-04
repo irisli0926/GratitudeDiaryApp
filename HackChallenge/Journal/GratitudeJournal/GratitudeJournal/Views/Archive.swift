@@ -18,6 +18,47 @@ struct Archive: View {
             (date: "24 Nov", journalCount: 1, mentioned: 4, journals: ["ipad", "iphone", "mac air"]),
         ]
     
+    //MARK: Dummy Variables
+//    let calendarEntries: [Post] = [
+//        Post(id:"1", journals: [
+//            "I'm grateful for the unexpected moments of laughter with @Lily and other classmates. It turned a regular study session into a memorable break, reminding me of the joy in simple connections.",
+//            "Grateful for the calm campus vibe before Thanksgiving. A moment to reflect amidst the quiet.",
+//            "I am grateful for my Starbucks drink. It really keeps me alive."
+//        ], mentioned: 1, journalCount: 3, date: "22 Nov"),
+//        Post(id:"2", journals: [
+//            "My friend is very nice.",
+//            "happy family",
+//            "wonderful trip"
+//        ], mentioned: 0, journalCount: 4, date: "23 Nov"),
+//        Post(id:"3", journals: [
+//            "ipad",
+//            "iphone",
+//            "mac air"
+//        ], mentioned: 4, journalCount: 1, date: "24 Nov"),
+//        Post(id:"4", journals: [
+//            "I'm grateful for my supportive family. Their love and encouragement keep me going every day.",
+//            "Grateful for the opportunity to learn new things and improve myself. Constant growth is essential.",
+//            "I am grateful for the beautiful sunrise I witnessed today. Nature's beauty is truly awe-inspiring."
+//            ], mentioned: 2, journalCount: 3, date: "25 Nov"),
+//        Post(id:"5", journals: [
+//            "Today, I'm grateful for the helpful colleagues at work. Collaboration makes tasks easier and more enjoyable.",
+//            "Grateful for the delicious home-cooked meal I had with my family. Food has a way of bringing people together.",
+//            "I am grateful for the chance to unwind and read a captivating book. Sometimes, a good story is all we need."
+//        ], mentioned: 0, journalCount: 3, date: "26 Nov"),
+//        Post(id:"6", journals: [
+//            "I'm grateful for the supportive friends who are always there for me, especially during tough times.",
+//            "Grateful for the progress I've made in achieving my personal goals. Hard work pays off.",
+//            "I am grateful for the opportunity to travel and explore new cultures. It broadens my perspective."
+//        ], mentioned: 3, journalCount: 3, date: "27 Nov"),
+//        Post(id:"7", journals: [
+//            "Today, I'm grateful for the beautiful weather that lifted my spirits and made the day brighter.",
+//            "Grateful for the inspiring podcast I listened to today. It motivated me to pursue my passions.",
+//            "I am grateful for the cozy moments spent with loved ones. Their presence is comforting."
+//        ], mentioned: 1, journalCount: 3, date: "28 Nov")
+//    ]
+    
+    
+    
     @State private var tabSelected: Tab = .book
     
     init() {
@@ -81,10 +122,12 @@ struct Archive: View {
             
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 16) {
+                    
                     ForEach(calendarEntries, id: \.date) { entry in
                         NavigationLink(destination: DetailedPage(entry: entry)) {
                             HStack {
                                 VStack(alignment: .leading) {
+                                    
                                     Text(entry.date)
                                         .font(Font.custom("KronaOne-Regular", size: 24))
                                         .foregroundColor(.black)
@@ -183,6 +226,7 @@ struct DetailedPage: View {
             
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 16) {
+                    
                     ForEach(entry.journals, id: \.self) { journal in                            HStack {
                         VStack(alignment: .leading) {
                             Text(journal)

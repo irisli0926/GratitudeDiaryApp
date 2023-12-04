@@ -16,7 +16,7 @@ class NetworkManager {
     private init() { }
         
     /// Endpoint for dev server
-    static private let devEndpoint: String = "insert host here"
+    static private let devEndpoint: String = "No host IP yet"
     
     // MARK: - Requests
     
@@ -48,7 +48,7 @@ class NetworkManager {
     
 //    fetch all friends
     static func fetchAllFriends(completion: @escaping ([Friend]) -> Void) {
-        let endpoint = "\(devEndpoint)/api/users/"
+        let endpoint = "\(devEndpoint)/api/users/<int:id>/friends"
 
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
@@ -103,7 +103,7 @@ class NetworkManager {
     
     static func dropFriend(friend: Friend, completion: @escaping (Friend?) -> Void) {
            
-        let endpoint = "\(devEndpoint)/api/removeFriend/"
+        let endpoint = "\(devEndpoint)/api/users/<int:id>/friends/<int:find_id>"
             
         let parameters: Parameters = [
             "id": friend.id
