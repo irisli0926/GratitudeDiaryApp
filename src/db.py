@@ -3,66 +3,11 @@ import datetime
 
 db = SQLAlchemy()
 
-# association_table = db.Table("association", db.Model.metadata,
-#     db.Column("course_id", db.Integer, db.ForeignKey("course.id")),
-#     db.Column("user_id", db.Integer, db.ForeignKey("user.id")),
-# )
-
-# new_association_table = db.Table("new_association", db.Model.metadata,
-#     db.Column("course_id", db.Integer, db.ForeignKey("course.id")),
-#     db.Column("user_id", db.Integer, db.ForeignKey("user.id")),
-# )
-
-# assoc_assignment = db.Table("new_association_2", db.Model.metadata,
-#     db.Column("course_id", db.Integer, db.ForeignKey("course.id")),
-# )
-
-# # your classes here
-# class Course(db.Model):
-#     """
-#     Course model
-#     """
-#     __tablename__ = "course"
-#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-#     code = db.Column(db.String, nullable=False)
-#     name = db.Column(db.String, nullable=False)
-#     assignments = db.relationship("Assignment", cascade = "delete")
-#     instructors = db.relationship("User", secondary=association_table, back_populates="teaching_courses")
-#     students = db.relationship("User", secondary=new_association_table, back_populates="enrolled_courses")
-#     #     assignments = db.relationship("Assignment", cascade="delete") 
-#     # instructors = db.relationship("User", secondary=association_table)
-#     # students = db.relationship("User", secondary=association_table)
-
-#     def __init__(self, **kwargs):
-#         self.code = kwargs.get("code")
-#         self.name = kwargs.get("name")
-#         # self.assignments = kwargs.get("assignments", "") 
-#         # self.instructors = kwargs.get("instructors") 
-#         # self.students = kwargs.get("students") 
-
-#     def serialize(self):
-#         return {
-#             "id": self.id,
-#             "code": self.code,
-#             "name": self.name,
-#             "assignments": [a.simple_serialize() for a in self.assignments],
-#             "instructors": [a.simple_serialize() for a in self.instructors], 
-#             "students": [a.simple_serialize() for a in self.students]
-#             # "assignments": [a.simple_serialize() for a in self.assignments],
-#             # "instructors": [a.simple_serialize() for a in self.students],
-#             # "students": [a.simple_serialize() for a in self.students]
-#             # "assignments": [],
-#             # "instructors": [],
-#             # "students": []
-            
-#         }
-    
-#     def simple_serialize(self):
-#         return {
-#             "id": self.id,
-#             "code": self.code,
-#             "name": self.name,
-#         }
+friends = db.Table(
+    'friends',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+    db.Column('friend_id', db.Integer, db.ForeignKey('user.id'), primary_key=True)
+)
 
 class User(db.Model):
     """
@@ -74,11 +19,20 @@ class User(db.Model):
     username = db.Column(db.String, nullable=False)
     image = db.Column(db.String, nullable=False)
     entries = db.relationship('Entry', cascade="delete")
+    friends = db.relationship(
+        'User',
+        secondary=friends,
+        primaryjoin=(friends.c.user_id == id),
+        secondaryjoin=(friends.c.friend_id == id),
+        backref=db.backref('friend_of', lazy='dynamic'),
+        lazy='dynamic'
+    )
 
     def __init__(self, **kwargs):
         self.name = kwargs.get("name")
         self.username = kwargs.get("username") 
         self.image = kwargs.get("image") 
+        self.friends = []
         # self.courses = kwargs.get("courses") 
 
     def serialize(self):
@@ -87,7 +41,8 @@ class User(db.Model):
             "name": self.name,
             "username": self.username,
             "image": self.image,
-            "entries": [a.simple_serialize() for a in self.entries]
+            "entries": [a.simple_serialize() for a in self.entries],
+            "friends": [a.simple_serialize() for a in self.friends]
         }
     
     def simple_serialize(self):
@@ -96,7 +51,22 @@ class User(db.Model):
             "name": self.name,
             "username": self.username,
             "image": self.image,
+            "friends": [a.simple_serialize() for a in self.friends]
         }
+    
+    def friends_serialize(self):
+        return {"friends": [a.simple_serialize() for a in self.friends]}
+    
+    def add_friend(self, user):
+        # if not self.is_friend(user):
+        self.friends.append(user)
+        user.friends.append(self)
+
+    def remove_friend(self, user):
+        # if self.is_friend(user):
+        self.friends.remove(user)
+        user.friends.remove(self)
+
 
 class Entry(db.Model):
     """
@@ -120,7 +90,7 @@ class Entry(db.Model):
         return {
             "id": self.id,
             "text": self.text,
-            "timestamp": datetime.datetime.now().isoformat() ,
+            "timestamp": datetime.datetime.now().isoformat(),
             "user": user.simple_serialize()
             # "course_id": [a.serialize() for a in self.courses]
         }
@@ -129,7 +99,7 @@ class Entry(db.Model):
         return {
             "id": self.id,
             "text": self.text,
-            "timestamp": datetime.datetime.now().isoformat() ,
+            "timestamp": datetime.datetime.now().isoformat(),
         }
 
 
