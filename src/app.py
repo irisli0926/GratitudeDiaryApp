@@ -87,42 +87,32 @@ def get_entry(id):
        return failure_response("Entry not found!")
    return success_response(task.serialize())
 
+# get friends 
+@app.route("/api/users/<int:id>/friends")
+def get_friends(id):
+    task = User.query.filter_by(id=id).first()
+    if task is None:
+       return failure_response("User not found!")
+    return success_response(task.friends_serialize())
 
-# @app.route("/api/courses/<int:id>/add/", methods=["POST"])
-# def add_user(id):
-#     task = Course.query.filter_by(id=id).first()
-#     if task is None:
-#         return failure_response("Course not found!")
-#     body = json.loads(request.data)
-#     user_id = body.get("user_id")
-#     type = body.get("type")
+@app.route("/api/users/<int:id>/friends/<int:friend_id>", methods=["POST"])
+def add_friend(id, friend_id):
+    user = User.query.filter_by(id=id).first()
+    friend = User.query.filter_by(id=friend_id).first()
+    if user is None or friend is None:
+       return failure_response("User not found!")
+    user.add_friend(friend)
+    return success_response("yay you have friends!")
 
-#     user = User.query.filter_by(id=user_id).first()
-#     if user is None:
-#         return failure_response("User not found!")
-#     if type == "instructor":
-#         task.instructors.append(user)
-#     elif type == "student":
-#         task.students.append(user)
-#     db.session.commit()
-#     return success_response(task.serialize(), 201)
+@app.route("/api/users/<int:id>/friends/<int:friend_id>", methods=["DELETE"])
+def add_friend(id, friend_id):
+    user = User.query.filter_by(id=id).first()
+    friend = User.query.filter_by(id=friend_id).first()
+    if user is None or friend is None:
+       return failure_response("User not found!")
+    user.delete_friend(friend)
+    return success_response("less friends!")
 
-# @app.route("/api/courses/<int:id>/assignment/", methods=["POST"])
-# def add_assignment(id):
-#     task = Course.query.filter_by(id=id).first()
-#     if task is None:
-#         return failure_response("Course not found!")
-#     body = json.loads(request.data)
-#     # title = body.get("title")
-#     # due_date = body.get("due_date")
-
-#     new_ass = Assignment(
-#        title = body.get("title"), due_date = body.get("due_date")
-#     )
-
-#     task.assignments.append(new_ass)
-#     db.session.commit()
-#     return success_response(new_ass.serialize(), 201)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
